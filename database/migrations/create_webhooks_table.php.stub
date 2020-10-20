@@ -1,0 +1,27 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateWebhooksTable extends Migration
+{
+    public function up()
+    {
+        Schema::create('webhooks', function (Blueprint $table) {
+            $table->string('id')->primary();
+            $table->text('description')->nullable();
+            $table->string('url');
+            $table->boolean('verify_ssl')->default(false);
+            $table->json('events');
+            $table->json('headers')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('webhooks');
+    }
+}
