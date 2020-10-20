@@ -1,7 +1,7 @@
 # Webhooks for Laravel
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/viezel/webhooks.svg?style=flat-square)](https://packagist.org/packages/viezel/webhooks)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/viezel/webhooks/run-tests?label=tests)](https://github.com/viezel/webhooks/actions?query=workflow%3Arun-tests+branch%3Amaster)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/viezel/webhooks/Tests?label=tests)](https://github.com/viezel/webhooks/actions?query=workflow%3Arun-tests+branch%3Amaster)
 
 Simple and powerful implementation of Webhooks. 
 
