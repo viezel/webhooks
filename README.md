@@ -3,9 +3,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/viezel/webhooks.svg?style=flat-square)](https://packagist.org/packages/viezel/webhooks)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/viezel/webhooks/run-tests?label=tests)](https://github.com/viezel/webhooks/actions?query=workflow%3Arun-tests+branch%3Amaster)
 
-
 Simple and clear implementation of Webhooks. 
-
 
 ## Installation
 
@@ -29,7 +27,7 @@ Route::middleware('auth:api')->prefix('api')->as('webhooks.api.')->group(functio
     Route::get('hooks', Viezel\Webhooks\Controllers\API\ListWebhooks::class)->name('list');
     Route::get('hooks/events', Viezel\Webhooks\Controllers\API\ListWebhookEvents::class)->name('events');
     Route::post('hooks', Viezel\Webhooks\Controllers\API\CreateWebhook::class)->name('create');
-    Route::post('hooks/{id}', Viezel\Webhooks\Controllers\API\DeleteWebhook::class)->name('delete');
+    Route::delete('hooks/{id}', Viezel\Webhooks\Controllers\API\DeleteWebhook::class)->name('delete');
 });
 ```
 
@@ -71,6 +69,45 @@ class PostUpdatedEvent implements ShouldDeliverWebhooks
     }
 }
 ```
+
+Next you need to register all your events with the `WebhookRegistry`. 
+This is typically done in the boot method of a ServiceProvider.
+
+```php
+public function boot()
+{
+    WebhookRegistry::listen(PostUpdatedEvent::class);
+}
+```
+
+To check everything works as expected, go visit the webhooks events route. The default route is: `/api/hooks/events`. 
+It depends how you register the webhook routes. 
+
+### List available webhooks events
+
+GET https://myapp.test/api/hooks/events
+
+### List registered webhooks
+
+GET https://myapp.test/api/hooks
+
+### Register a webhook
+
+POST https://myapp.test/api/hooks
+
+```json
+{
+    "events": [
+        "post:updated"
+    ],
+    "url": "https://another-app.com/some/callback/route"
+}
+```
+
+### Delete a webhook
+
+DELETE https://myapp.test/api/hooks/{id}
+
 
 ## Testing
 
