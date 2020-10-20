@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 trait GeneratesIds
 {
-    public static function bootGeneratesIds()
+    public static function bootGeneratesIds(): void
     {
         static::creating(function (self $model) {
             if (! $model->getKey()) {
@@ -16,17 +16,17 @@ trait GeneratesIds
         });
     }
 
-    public function getIncrementing()
+    public function getIncrementing(): bool
     {
         return false;
     }
 
-    public function getKeyType()
+    public function getKeyType(): string
     {
         return 'string';
     }
 
-    public function getIdAttribute($value)
+    public function getIdAttribute($value): string
     {
         return (string) $value;
     }

@@ -8,7 +8,7 @@ use Viezel\Webhooks\Models\Webhook;
 
 class WebhookListener
 {
-    public function handle(ShouldDeliverWebhooks $event)
+    public function handle(ShouldDeliverWebhooks $event): void
     {
         Webhook::trigger($event->getWebhookName(), $event->getWebhookPayload());
     }

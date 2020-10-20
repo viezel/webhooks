@@ -9,12 +9,12 @@ use Viezel\Webhooks\WebhookRegistry;
 
 class CreateWebhookRequest extends FormRequest
 {
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'events' => ['required', 'array'],

@@ -30,7 +30,7 @@ class WebhookCall implements ShouldQueue
         $this->payload = $payload;
     }
 
-    public function handle()
+    public function handle(): void
     {
         Http::timeout(10)
             //->retry(3, 60)
